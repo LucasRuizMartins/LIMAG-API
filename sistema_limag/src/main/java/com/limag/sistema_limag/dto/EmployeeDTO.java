@@ -1,6 +1,7 @@
 package com.limag.sistema_limag.dto;
 
 import com.limag.sistema_limag.entities.Employee;
+import com.limag.sistema_limag.enums.Department;
 import jakarta.validation.constraints.NotBlank;
 
 import jakarta.validation.constraints.PastOrPresent;
@@ -27,7 +28,7 @@ public class EmployeeDTO {
     private BigDecimal salary;
     private String contractType;
     private List<String> emails = new ArrayList<>();
-
+    private Department department;
 
     public EmployeeDTO() {
 
@@ -39,12 +40,14 @@ public class EmployeeDTO {
         this.salary = entity.getSalary();
         this.contractType = entity.getContractType();
         this.emails = entity.getEmails();
+        this.department = entity.getDepartment();
     }
-    public EmployeeDTO(Long id, LocalDate birthDate, BigDecimal salary, String contractType, List<String> emails) {
+    public EmployeeDTO(Long id, LocalDate birthDate, BigDecimal salary, String contractType, Department department, List<String> emails) {
         this.id = id;
         this.birthDate = birthDate;
         this.salary = salary;
         this.contractType = contractType;
+        this.department = department;
         this.emails = emails;
     }
 
@@ -70,5 +73,9 @@ public class EmployeeDTO {
 
     public List<String> getEmails() {
         return emails;
+    }
+
+    public Department getDepartment() {
+        return department;
     }
 }
