@@ -18,19 +18,15 @@ public class Seller extends Employee {
     private SellerNivel sellerNivel;
     private String squad;
 
-
     public Seller(Long id, LocalDate birthDate, BigDecimal salary, String contractType, String name, Department department, SellerNivel sellerNivel, String squad) {
         super(id, birthDate, salary, contractType, name, department);
         this.sellerNivel = sellerNivel;
         this.squad = squad;
     }
 
-
     public Seller() {
 
-
     }
-
 
     public SellerNivel getSellerNivel() {
         return sellerNivel;

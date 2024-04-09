@@ -17,7 +17,13 @@ INSERT INTO tb_vendedores (id, seller_nivel, squad) VALUES (3,'SPECIALIST','ESPA
 INSERT INTO tb_vendedores (id, seller_nivel, squad) VALUES (5,'SUPPORT','APOIO');
 
 
- -- INSERT INTO tb_vendedores (employee_id, seller_nivel, squad) VALUES (1, 'JUNIOR','SPIDER JR');
+ INSERT INTO tb_grupo_clientes (name) VALUES ('CCR');
+ INSERT INTO tb_grupo_clientes (name) VALUES ('CSN');
+ INSERT INTO tb_grupo_clientes (name) VALUES ('ARCELOR');
+ INSERT INTO tb_grupo_clientes (name) VALUES ('GERDAU');
 
-
-
+ INSERT INTO tb_clientes(client_group_id,address,name) VALUES (1,'CCR São Paulo' ,'Linha 8 e 9');
+ INSERT INTO tb_clientes(client_group_id,address,name) VALUES (1,'CCR São Paulo' ,'Via Mobilidade');
+ INSERT INTO tb_clientes(client_group_id,address,name) VALUES (2,'Av. Brig. Faria Lima, 3400' ,'CSN Companhia Siderurgica Nacional');
+ INSERT INTO tb_clientes(client_group_id,address,name) VALUES (3,'R. Romeu Cicarelli, 70 - Vila Alice, Diadema - SP' ,'ARCELORMITTAL');
+ INSERT INTO tb_clientes(client_group_id,address,name) VALUES (4,' Av. Mal. Mascarenhas de Morais, 1736' ,'GERDAU RECIFE PE');

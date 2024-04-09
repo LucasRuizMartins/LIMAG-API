@@ -30,6 +30,7 @@ public class Employee {
 
 
     @ElementCollection
+    @CollectionTable(name="tb_email_funcionarios")
     List<String> emails = new ArrayList<>();
 
     public Employee() {

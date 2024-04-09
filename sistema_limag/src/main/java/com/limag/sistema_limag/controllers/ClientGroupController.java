@@ -1,10 +1,9 @@
 package com.limag.sistema_limag.controllers;
 
-import com.limag.sistema_limag.dto.EmployeeDTO;
-import com.limag.sistema_limag.dto.SellerDTO;
-import com.limag.sistema_limag.services.EmployeeService;
-import com.limag.sistema_limag.services.SellerService;
-import jakarta.validation.Valid;
+import com.limag.sistema_limag.dto.ClientDTO;
+import com.limag.sistema_limag.dto.ClientGroupDTO;
+import com.limag.sistema_limag.services.ClientGroupService;
+import com.limag.sistema_limag.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,29 +14,29 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/vendedores")
-public class SellerController {
+@RequestMapping(value = "/grupo_clientes")
+public class ClientGroupController {
 
     @Autowired
-    private SellerService service;
+    private ClientGroupService service;
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<SellerDTO> findById(@PathVariable Long id) {
-        SellerDTO dto = service.findById(id);
+    public ResponseEntity<ClientGroupDTO> findById(@PathVariable Long id) {
+        ClientGroupDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
 
     @GetMapping
-    public ResponseEntity<Page<SellerDTO>> findAll(
+    public ResponseEntity<Page<ClientGroupDTO>> findAll(
             @RequestParam(name = "name", defaultValue = "") String name,
             Pageable pageable) {
-        Page<SellerDTO> dto = service.findAll(name, pageable);
+        Page<ClientGroupDTO> dto = service.findAll(name, pageable);
         return ResponseEntity.ok(dto);
     }
 
 
     @PostMapping
-    public ResponseEntity<SellerDTO> insert(@Valid @RequestBody SellerDTO dto) {
+    public ResponseEntity<ClientGroupDTO> insert(@RequestBody ClientGroupDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -46,11 +45,10 @@ public class SellerController {
 
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<SellerDTO> update(@PathVariable Long id, @Valid @RequestBody SellerDTO dto) {
+    public ResponseEntity<ClientGroupDTO> update(@PathVariable Long id, @RequestBody ClientGroupDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }
-
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {

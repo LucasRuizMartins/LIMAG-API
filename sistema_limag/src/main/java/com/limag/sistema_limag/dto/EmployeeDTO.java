@@ -22,6 +22,8 @@ public class EmployeeDTO {
     @Size(min = 5, max = 80, message = "Nome precisar ter de 5 a 80 caracteres")
     @NotBlank(message = "Favor informar o nome")
     private String name;
+
+
     @PastOrPresent(message = "O nascimento precisa ser anterior a data atual")
     private LocalDate birthDate;
 

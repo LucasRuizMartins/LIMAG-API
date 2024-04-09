@@ -4,6 +4,7 @@ package com.limag.sistema_limag.controllers.handlers;
 import com.limag.sistema_limag.dto.CustomError;
 import com.limag.sistema_limag.dto.ValidationError;
 
+import com.limag.sistema_limag.services.exceptions.ClientNotFoundException;
 import com.limag.sistema_limag.services.exceptions.DatabaseException;
 import com.limag.sistema_limag.services.exceptions.EmployeeNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +21,14 @@ import java.time.Instant;
 public class ControllerExceptionHandler {
 
     @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<CustomError> resourceNotFound(EmployeeNotFoundException e, HttpServletRequest request) {
+    public ResponseEntity<CustomError> employeeNotFound(EmployeeNotFoundException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ClientNotFoundException.class)
+    public ResponseEntity<CustomError> clientNotFound(ClientNotFoundException e, HttpServletRequest request) {
         HttpStatus status = HttpStatus.NOT_FOUND;
         CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
