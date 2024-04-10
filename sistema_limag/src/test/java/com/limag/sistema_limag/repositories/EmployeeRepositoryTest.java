@@ -1,6 +1,6 @@
 package com.limag.sistema_limag.repositories;
 
-import com.limag.sistema_limag.controllers.EmployeeController;
+
 import com.limag.sistema_limag.dto.EmployeeDTO;
 import com.limag.sistema_limag.entities.Employee;
 import com.limag.sistema_limag.enums.Department;
@@ -9,15 +9,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
-
-
 import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -31,17 +31,8 @@ class EmployeeRepositoryTest {
 
     @Test
     @DisplayName("Shoud get user employee sucessfully from DB")
-    void findEmployeeByNameSucess() {
-
-       EmployeeDTO expectedDTO  = new EmployeeDTO(
-               Long.valueOf(19),
-               "Lucas Ruiz" ,
-               LocalDate.of(1993,02,24),
-               new BigDecimal("2850.00"),
-               "CLT",
-               Arrays.asList("ti4@limag.com.br", "email2@example.com") ,
-               Department.TECNOLOGIA ) ;
-       this.createEmployee(expectedDTO);
+    void findEmployeeByNameSucessCase() {
+        this.insertDataIntoBase();
 
         Optional<Employee> result = this.repository.findEmployeeByName("Lucas Ruiz");
         assertThat(result.isPresent()).isTrue();
@@ -49,9 +40,37 @@ class EmployeeRepositoryTest {
 
     @Test
     @DisplayName("Shoud get user employee when employee not exists")
-    void findEmployeeByNameFail() {
+    void findEmployeeByNameFailCase() {
         Optional<Employee> result = this.repository.findEmployeeByName("Lucas Ruiz");
         assertThat(result.isEmpty()).isTrue();
+    }
+
+
+    @Test
+    @DisplayName("Shoud get Page of employee sucessfully from DB")
+    void searchEmployeeByNameSucessCase(){
+        this.insertDataIntoBase();
+
+        Page<Employee> result = repository.searchByName("Lucas", Pageable.unpaged());
+        assertThat(result.getContent()).hasSize(2);
+    }
+
+    @Test
+    @DisplayName("Shoud not get Page of employee because search name is wrong")
+    void searchEmployeeByNameFailCase(){
+        this.insertDataIntoBase();
+
+        Page<Employee> result = repository.searchByName("David", Pageable.unpaged());
+        assertThat(result.getContent()).isNotEqualTo(2);
+    }
+
+
+    private void insertDataIntoBase(){
+        List<EmployeeDTO> employees = new ArrayList<>();
+        employees.add(new EmployeeDTO(19L,"Lucas Ruiz" ,LocalDate.of(1993,02,24),new BigDecimal("2850.00"),"CLT",Arrays.asList("teste@limag.com.br", "email2@example.com") ,Department.TECNOLOGIA ));
+        employees.add(new EmployeeDTO(21L,"Lucas Silva" ,LocalDate.of(1995,03,21),new BigDecimal("2550.00"),"CLT",Arrays.asList("ex@limag.com.br", "email2@example.com") ,Department.COMPRAS ));
+
+        employees.forEach(this::createEmployee);
     }
 
     private Employee createEmployee(EmployeeDTO employeeDTO) {
