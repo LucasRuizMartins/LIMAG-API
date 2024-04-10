@@ -6,13 +6,19 @@ import jakarta.validation.constraints.NotBlank;
 
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDTO {
 
 
@@ -32,9 +38,7 @@ public class EmployeeDTO {
     private List<String> emails = new ArrayList<>();
     private Department department;
 
-    public EmployeeDTO() {
 
-    }
     public EmployeeDTO(Employee entity) {
         this.id = entity.getId();
         this.name = entity.getName();
@@ -44,14 +48,7 @@ public class EmployeeDTO {
         this.emails = entity.getEmails();
         this.department = entity.getDepartment();
     }
-    public EmployeeDTO(Long id, LocalDate birthDate, BigDecimal salary, String contractType, Department department, List<String> emails) {
-        this.id = id;
-        this.birthDate = birthDate;
-        this.salary = salary;
-        this.contractType = contractType;
-        this.department = department;
-        this.emails = emails;
-    }
+
 
     public Long getId() {
         return id;
@@ -80,4 +77,18 @@ public class EmployeeDTO {
     public Department getDepartment() {
         return department;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmployeeDTO that = (EmployeeDTO) o;
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(birthDate, that.birthDate) && Objects.equals(salary, that.salary) && Objects.equals(contractType, that.contractType) && Objects.equals(emails, that.emails) && department == that.department;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, birthDate, salary, contractType, emails, department);
+    }
+
 }

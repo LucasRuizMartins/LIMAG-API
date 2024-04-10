@@ -1,8 +1,12 @@
 package com.limag.sistema_limag.entities;
 
 
+import com.limag.sistema_limag.dto.EmployeeDTO;
 import com.limag.sistema_limag.enums.Department;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
@@ -13,6 +17,9 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "tb_funcionarios")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 public class Employee {
 
 
@@ -33,46 +40,22 @@ public class Employee {
     @CollectionTable(name="tb_email_funcionarios")
     List<String> emails = new ArrayList<>();
 
-    public Employee() {
-    }
-    public Employee(Long id, LocalDate birthDate, BigDecimal salary, String contractType, String name, Department department) {
-        this.id = id;
-        this.name = name;
-        this.birthDate = birthDate;
-        this.salary = salary;
-        this.contractType = contractType;
-        this.department = department;
+    public Employee(EmployeeDTO dto) {
+        this.id = dto.getId();
+        this.name = dto.getName();
+        this.birthDate = dto.getBirthDate();
+        this.salary = dto.getSalary();
+        this.contractType = dto.getContractType();
+        this.department = dto.getDepartment();
+        this.emails = dto.getEmails();
     }
 
-    public Department getDepartment() {
-        return department;
-    }
 
     public void setDepartment(Department department) {
         this.department = department;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    public String getContractType() {
-        return contractType;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+     public void setName(String name) {
         this.name = name;
     }
 

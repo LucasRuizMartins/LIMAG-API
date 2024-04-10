@@ -17,12 +17,12 @@ public class Seller extends Employee {
     @Enumerated(EnumType.STRING)
     private SellerNivel sellerNivel;
     private String squad;
-
+/*
     public Seller(Long id, LocalDate birthDate, BigDecimal salary, String contractType, String name, Department department, SellerNivel sellerNivel, String squad) {
         super(id, birthDate, salary, contractType, name, department);
         this.sellerNivel = sellerNivel;
         this.squad = squad;
-    }
+    }*/
 
     public Seller() {
 
