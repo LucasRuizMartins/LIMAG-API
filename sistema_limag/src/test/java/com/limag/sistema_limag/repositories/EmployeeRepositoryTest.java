@@ -5,6 +5,7 @@ import com.limag.sistema_limag.dto.EmployeeDTO;
 import com.limag.sistema_limag.entities.Employee;
 import com.limag.sistema_limag.enums.Department;
 import jakarta.persistence.EntityManager;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,37 +29,36 @@ class EmployeeRepositoryTest {
     EntityManager entityManager;
     @Autowired
     EmployeeRepository repository;
+    @BeforeEach
+    public void setUp(){
+        this.insertDataIntoBase();
+    }
 
     @Test
     @DisplayName("Shoud get user employee sucessfully from DB")
     void findEmployeeByNameSucessCase() {
-        this.insertDataIntoBase();
-
         Optional<Employee> result = this.repository.findEmployeeByName("Lucas Ruiz");
         assertThat(result.isPresent()).isTrue();
     }
 
     @Test
-    @DisplayName("Shoud get user employee when employee not exists")
+    @DisplayName("Should get user employee when employee not exists")
     void findEmployeeByNameFailCase() {
-        Optional<Employee> result = this.repository.findEmployeeByName("Lucas Ruiz");
+        Optional<Employee> result = this.repository.findEmployeeByName("Jose Ruiz");
         assertThat(result.isEmpty()).isTrue();
     }
 
 
     @Test
-    @DisplayName("Shoud get Page of employee sucessfully from DB")
+    @DisplayName("Should get Page of employee sucessfully from DB")
     void searchEmployeeByNameSucessCase(){
-        this.insertDataIntoBase();
-
         Page<Employee> result = repository.searchByName("Lucas", Pageable.unpaged());
         assertThat(result.getContent()).hasSize(2);
     }
 
     @Test
-    @DisplayName("Shoud not get Page of employee because search name is wrong")
+    @DisplayName("Should not get Page of employee because search name is wrong")
     void searchEmployeeByNameFailCase(){
-        this.insertDataIntoBase();
 
         Page<Employee> result = repository.searchByName("David", Pageable.unpaged());
         assertThat(result.getContent()).isNotEqualTo(2);

@@ -2,8 +2,12 @@ package com.limag.sistema_limag.entities;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_clientes")
 public class Client {
 
@@ -16,17 +20,6 @@ public class Client {
     @ManyToOne
     @JoinColumn(name="client_group_id")
     private ClientGroup clientGroup;
-
-    public Client() {
-
-    }
-
-    public Client(Long id, String name, String address, ClientGroup clientGroup) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.clientGroup = clientGroup;
-    }
 
 
     public Long getId() {

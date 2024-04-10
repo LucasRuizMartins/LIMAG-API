@@ -1,11 +1,15 @@
 package com.limag.sistema_limag.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_grupo_clientes")
 public class ClientGroup {
 
@@ -14,19 +18,13 @@ public class ClientGroup {
     private Long id;
     private String name;
 
-
     @OneToMany(mappedBy = "clientGroup")
     private List<Client> customers = new ArrayList<>();
 
-    public ClientGroup() {    }
+    @OneToMany(mappedBy = "clientGroup")
+    private List<Purchaser> purchasers = new ArrayList<>();
 
-    public ClientGroup(Long id, String name, List<Client> customers) {
-        this.id = id;
-        this.name = name;
-        this.customers = customers;
-    }
-
-    public Long getId() {
+     public Long getId() {
         return id;
     }
 
@@ -45,8 +43,13 @@ public class ClientGroup {
     public List<Client> getCustomers() {
         return  new ArrayList<>(customers) ;
     }
-
+    public List<Purchaser> getPurchasers() {
+        return  new ArrayList<>(purchasers) ;
+    }
     public void addCustomers(Client client) {
         customers.add(client);
+    }
+    public void addPurchaser(Purchaser purchaser) {
+        purchasers.add(purchaser);
     }
 }

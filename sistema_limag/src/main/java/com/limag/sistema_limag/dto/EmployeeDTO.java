@@ -29,7 +29,6 @@ public class EmployeeDTO {
     @NotBlank(message = "Favor informar o nome")
     private String name;
 
-
     @PastOrPresent(message = "O nascimento precisa ser anterior a data atual")
     private LocalDate birthDate;
 

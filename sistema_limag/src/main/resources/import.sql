@@ -17,13 +17,30 @@ INSERT INTO tb_vendedores (id, seller_nivel, squad) VALUES (3,'SPECIALIST','ESPA
 INSERT INTO tb_vendedores (id, seller_nivel, squad) VALUES (5,'SUPPORT','APOIO');
 
 
+INSERT INTO tb_email_funcionarios (employee_id, emails) VALUES (1,'email@teste.com')
+INSERT INTO tb_email_funcionarios (employee_id, emails) VALUES (1,'email2@teste.com')
+INSERT INTO tb_email_funcionarios (employee_id, emails) VALUES (2,'email3@teste.com')
+INSERT INTO tb_email_funcionarios (employee_id, emails) VALUES (4,'email4@teste.com')
+
  INSERT INTO tb_grupo_clientes (name) VALUES ('CCR');
  INSERT INTO tb_grupo_clientes (name) VALUES ('CSN');
  INSERT INTO tb_grupo_clientes (name) VALUES ('ARCELOR');
  INSERT INTO tb_grupo_clientes (name) VALUES ('GERDAU');
+ INSERT INTO tb_grupo_clientes (name) VALUES ('VOITH');
 
  INSERT INTO tb_clientes(client_group_id,address,name) VALUES (1,'CCR São Paulo' ,'Linha 8 e 9');
  INSERT INTO tb_clientes(client_group_id,address,name) VALUES (1,'CCR São Paulo' ,'Via Mobilidade');
  INSERT INTO tb_clientes(client_group_id,address,name) VALUES (2,'Av. Brig. Faria Lima, 3400' ,'CSN Companhia Siderurgica Nacional');
  INSERT INTO tb_clientes(client_group_id,address,name) VALUES (3,'R. Romeu Cicarelli, 70 - Vila Alice, Diadema - SP' ,'ARCELORMITTAL');
  INSERT INTO tb_clientes(client_group_id,address,name) VALUES (4,' Av. Mal. Mascarenhas de Morais, 1736' ,'GERDAU RECIFE PE');
+
+ INSERT INTO tb_compradores(client_group_id,name,origin, email,phone_number) VALUES(5,'ABNER SANTOS','VENDAS','abner.santos@voith.com','(11)3944-4962');
+ INSERT INTO tb_compradores(client_group_id,name,origin, email,phone_number) VALUES(5,'ALEX AQUINO','VENDAS','Alex.Aquino@voith.com','(11)91555-5269');
+ INSERT INTO tb_compradores(client_group_id,name,origin, email,phone_number) VALUES(3,'ANDRE JUNIOR','PROSPECÇÃO','andre.junior@arcelormittal.com.br','(27)3348-3865');
+
+ -- '1992-03-10'
+
+ INSERT INTO tb_compradores_por_vendedores(pote,reference_date,purchaser_id,seller_id) VALUES (3,'2024-02-01',2,2 );
+ INSERT INTO tb_compradores_por_vendedores(pote,reference_date,purchaser_id,seller_id) VALUES (2,'2024-01-01',2,2 );
+ INSERT INTO tb_compradores_por_vendedores(pote,reference_date,purchaser_id,seller_id) VALUES (1,'2023-12-01',2,2 );
+ INSERT INTO tb_compradores_por_vendedores(pote,reference_date,purchaser_id,seller_id) VALUES (1,'2024-02-01',3,1 );
