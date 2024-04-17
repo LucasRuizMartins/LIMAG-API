@@ -16,7 +16,7 @@ public class PurchaserDTO {
     private String origin;
     private String phoneNumber;
     private String email;
-    private ClientGroup clientGroup;
+    private ClientGroupDTO clientGroup;
 
 
     public PurchaserDTO(Purchaser entity) {
@@ -25,7 +25,7 @@ public class PurchaserDTO {
         origin = entity.getOrigin();
         phoneNumber = entity.getPhoneNumber();
         email = entity.getEmail();
-        clientGroup = entity.getClientGroup();
+        clientGroup = new ClientGroupDTO(entity.getClientGroup());
 
     }
 

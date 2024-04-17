@@ -1,6 +1,5 @@
 package com.limag.sistema_limag.repositories;
 
-import com.limag.sistema_limag.entities.Client;
 import com.limag.sistema_limag.entities.ClientGroup;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
