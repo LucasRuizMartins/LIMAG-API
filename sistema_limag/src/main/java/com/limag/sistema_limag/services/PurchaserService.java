@@ -1,8 +1,11 @@
 package com.limag.sistema_limag.services;
 
 import com.limag.sistema_limag.dto.PurchaserDTO;
+import com.limag.sistema_limag.dto.PurchaserForSellerDTO;
 import com.limag.sistema_limag.entities.ClientGroup;
 import com.limag.sistema_limag.entities.Purchaser;
+import com.limag.sistema_limag.entities.PurchaserForSeller;
+import com.limag.sistema_limag.repositories.PurchaserForSellerRepository;
 import com.limag.sistema_limag.repositories.PurchaserRepository;
 import com.limag.sistema_limag.services.exceptions.ClientNotFoundException;
 import com.limag.sistema_limag.services.exceptions.DatabaseException;
@@ -21,6 +24,7 @@ public class PurchaserService {
 
     @Autowired
     private PurchaserRepository repository;
+
 
     @Transactional(readOnly = true)
     public PurchaserDTO findById(Long id) {
@@ -79,8 +83,10 @@ public class PurchaserService {
         entity.setPhoneNumber(dto.getPhoneNumber());
         entity.setClientGroup(group);
         entity.setEmail(dto.getEmail());
-
-
      }
+
+
+
+
 
 }

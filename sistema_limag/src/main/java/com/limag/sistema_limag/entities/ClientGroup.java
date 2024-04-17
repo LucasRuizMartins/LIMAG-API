@@ -1,5 +1,6 @@
 package com.limag.sistema_limag.entities;
 
+import com.limag.sistema_limag.dto.ClientGroupDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -23,6 +24,11 @@ public class ClientGroup {
 
     @OneToMany(mappedBy = "clientGroup")
     private List<Purchaser> purchasers = new ArrayList<>();
+
+    public  ClientGroup(ClientGroupDTO dto){
+        id = dto.getId();
+        name = dto.getName();
+    }
 
      public Long getId() {
         return id;

@@ -1,8 +1,8 @@
 package com.limag.sistema_limag.controllers;
 
-import com.limag.sistema_limag.dto.EmployeeDTO;
 import com.limag.sistema_limag.dto.PurchaserDTO;
 import com.limag.sistema_limag.dto.PurchaserForSellerDTO;
+import com.limag.sistema_limag.services.PurchaserForSellerService;
 import com.limag.sistema_limag.services.PurchaserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,30 +14,26 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@RequestMapping(value = "/compradores")
-public class PurchaserController {
+@RequestMapping(value = "/comprador_vendedor")
+public class PurchaserForSellerController {
 
     @Autowired
-    private PurchaserService service;
+    private PurchaserForSellerService service;
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<PurchaserDTO> findById(@PathVariable Long id) {
-        PurchaserDTO dto = service.findById(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<PurchaserForSellerDTO> findPurchaserForSellerById(@PathVariable Long id) {
+        PurchaserForSellerDTO dto = service.findById(id);
         return ResponseEntity.ok(dto);
     }
-
 
     @GetMapping
-    public ResponseEntity<Page<PurchaserDTO>> findAll(
-            @RequestParam(name = "name", defaultValue = "") String name,
-            Pageable pageable) {
-        Page<PurchaserDTO> dto = service.findAll(name, pageable);
+    public ResponseEntity<Page<PurchaserForSellerDTO>> findAllPurchaseForSeller(Pageable pageable) {
+        Page<PurchaserForSellerDTO> dto = service.findAll(pageable);
         return ResponseEntity.ok(dto);
     }
 
-
     @PostMapping
-    public ResponseEntity<PurchaserDTO> insert(@RequestBody PurchaserDTO dto) {
+    public ResponseEntity<PurchaserForSellerDTO> insert(@RequestBody PurchaserForSellerDTO dto) {
         dto = service.insert(dto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(dto.getId()).toUri();
@@ -45,7 +41,7 @@ public class PurchaserController {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<PurchaserDTO> update(@PathVariable Long id,  @RequestBody PurchaserDTO dto) {
+    public ResponseEntity<PurchaserForSellerDTO> update(@PathVariable Long id,  @RequestBody PurchaserForSellerDTO dto) {
         dto = service.update(id, dto);
         return ResponseEntity.ok(dto);
     }

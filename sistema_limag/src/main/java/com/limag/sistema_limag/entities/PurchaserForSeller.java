@@ -1,13 +1,14 @@
 package com.limag.sistema_limag.entities;
 
+import com.limag.sistema_limag.dto.EmployeeDTO;
+import com.limag.sistema_limag.dto.PurchaserForSellerDTO;
+import com.limag.sistema_limag.dto.SellerDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
-import java.util.Objects;
 
 
 @Getter
@@ -17,7 +18,6 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_compradores_por_vendedores")
 public class PurchaserForSeller {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,5 +36,12 @@ public class PurchaserForSeller {
     @Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
     private LocalDate referenceDate;
 
+    public PurchaserForSeller (PurchaserForSellerDTO dto) {
+        seller = new Seller(dto.getSeller());
+        purchaser = new Purchaser(dto.getPurchaser());
+        pote = dto.getPote();
+        referenceDate = dto.getReferenceDate();
+
+    }
 
 }

@@ -6,12 +6,17 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@AllArgsConstructor
+@NoArgsConstructor
 public class SellerDTO {
 
     private Long id;
@@ -28,23 +33,6 @@ public class SellerDTO {
     private String contractType;
     private List<String> emails = new ArrayList<>();
     private Department department;
-
-
-    public SellerDTO() {
-
-    }
-
-    public SellerDTO(Long id, SellerNivel sellerNivel, String squad, String name, LocalDate birthDate, BigDecimal salary, String contractType, List<String> emails, Department department) {
-        this.id = id;
-        this.sellerNivel = sellerNivel;
-        this.squad = squad;
-        this.name = name;
-        this.birthDate = birthDate;
-        this.salary = salary;
-        this.contractType = contractType;
-        this.emails = emails;
-        this.department = department;
-    }
 
     public SellerDTO(Seller entity) {
         id = entity.getId();

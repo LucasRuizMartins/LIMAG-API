@@ -2,15 +2,20 @@ package com.limag.sistema_limag.entities;
 
 
 
+import com.limag.sistema_limag.dto.SellerDTO;
 import com.limag.sistema_limag.enums.Department;
 import com.limag.sistema_limag.enums.SellerNivel;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "tb_vendedores")
 public class Seller extends Employee {
 
@@ -24,9 +29,16 @@ public class Seller extends Employee {
         this.squad = squad;
     }*/
 
-    public Seller() {
+  public Seller(SellerDTO dto) {
+     this.setDepartment(dto.getDepartment());
+     this.setBirthDate(dto.getBirthDate());
+     this.setContractType(dto.getContractType());
+     this.setSalary(dto.getSalary());
+     this.setName(dto.getName());
+      sellerNivel = dto.getSellerNivel();
+      squad = dto.getSquad();
 
-    }
+  }
 
     public SellerNivel getSellerNivel() {
         return sellerNivel;
